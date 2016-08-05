@@ -7,8 +7,8 @@ import java.util.*
 
 val repos = repos()
 
-fun versionFor(): String {
-	val p = Properties().apply { FileInputStream("test.properties").use { fis -> load(fis) } }
+fun versionFor(directory: String): String {
+	val p = Properties().apply { FileInputStream("${directory}/test.properties").use { fis -> load(fis) } }
 	return p.getProperty("version", "")
 }
 	
@@ -18,7 +18,7 @@ val example = project {
     name = "example"
     group = "com.example"
     artifactId = name
-    version = versionFor()
+    version = versionFor(directory)
 
     sourceDirectories {
         path("src/main/java")
@@ -33,7 +33,7 @@ val example = project {
     }
 
     dependenciesTest {
-        compile("org.testng:testng:6.9.9")
+        compile("org.testng:testng:")
 
     }
 
@@ -49,11 +49,11 @@ val example = project {
 
 val example2 = project {
 
-	directory = "example2"
+    directory = "example2"
     name = "example2"
     group = "com.example"
     artifactId = name
-    version = versionFor()
+    version = versionFor(directory)
 
     sourceDirectories {
         path("src/main/java")
@@ -68,7 +68,7 @@ val example2 = project {
     }
 
     dependenciesTest {
-        compile("org.testng:testng:6.9.9")
+        compile("org.testng:testng:")
 
     }
 
